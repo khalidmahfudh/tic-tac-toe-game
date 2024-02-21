@@ -32,3 +32,13 @@ body {
     min-width: 350px;
     border: solid 10px var(--brown-color);
 }
+
+.x-hover:hover::after {
+    content: "X";
+    opacity: 0.4;
+}
+
+.o-hover:hover::after {
+content: "O";
+opacity: 0.4;
+}

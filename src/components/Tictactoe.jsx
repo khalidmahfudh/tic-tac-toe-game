@@ -30,7 +30,7 @@ function Tictactoe() {
         <div>
             <h1>Tic Tac Toe</h1>
             <div className="main">
-                <Board onSquareClick={handleSquareClick} squares={ squares } />
+                <Board onSquareClick={handleSquareClick} squares={ squares } playerTurn={playerTurn}/>
                 <History />
             </div>
             <div className="footer">
