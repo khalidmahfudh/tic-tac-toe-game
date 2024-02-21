@@ -1,6 +1,9 @@
 function History({moves}) {
     return <div className="history">
-        <ol>{moves}</ol>
+        <p>HISTORY</p>
+        <div className="history-list">
+            <ol>{moves}</ol>
+        </div>
     </div>;
 }
 

@@ -4,13 +4,99 @@
     --black-color: #271810;
     --white-color: #e7cfb4;
 }
+* {
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    font-family: sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: var(--grey-color);
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    max-height: 100vh;
+    width: 100%;
+    background-color: var(--white-color);
+    overflow: hidden;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+}
+
+h1.title {
+    color: var(--black-color);
+    margin: 10px auto;
+    border: 5px dotted var(--black-color);
+    padding: 10px 20px;
+}
+
+
+.container .main {
+    padding: 20px;
+    display: flex;
+}
+
+.container .main .history {
+    width: 150px;
+    max-height: 350px;
+    margin-left: 15px;
+    border: solid 10px var(--brown-color);
+    background-color: var(--white-color);
+    overflow-y: hidden;
+}
+
+.container .main .history p {
+    margin-top: 0;
+    padding: 10px;
+    text-align: center;
+    max-height: 20%;
+    border-bottom: 4px solid var(--brown-color);
+}
+
+.container .main .history .history-list{
+    padding: 10px 0;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    max-height: 82%;
+
+}
+
+.container .main .history .history-list ol{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.container .main .history .history-list ol button{
+    width: 120px;
+    height: 35px;
+    padding: 2px;
+    border: 2px solid var(--black-color);
+    background-color: var(--white-color);
+    font-size: 0.8rem;
+    color: var(--black-color);
+    cursor: pointer;
+    margin: 5px;
+    transition: .3s ease;
+}
+
+.container .main .history .history-list ol button:hover {
+    background-color: var(--brown-color);
+    color: var(--white-color);
+    border-radius: 5px;
+}
+
+.container .main .history .history-list ol button.game-start-desc {
+    background-color: var(--brown-color);
+    color: var(--white-color);
+    height: 40px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
 
 .square {
     width: 35px;
@@ -43,23 +129,62 @@ content: "O";
 opacity: 0.4;
 }
 
-.game-over {
-    text-align: center;
-    border: var(--brown-color) solid 8px;
-    background-color: var(--white-color);
-    padding: 10px;
-    margin-top: 20px;
-    font-size: 1.5em;
+.footer {
+    display: flex;
+    flex-direction: column;
     width: 335px;
 }
 
-.reset-button {
+.game-over {
     text-align: center;
-    border: var(--brown-color) solid 8px;
+    border: var(--black-color) dotted 4px;
     background-color: var(--white-color);
-    padding: 10px;
-    margin-top: 20px;
-    font-size: 1.5em;
-    width: 335px;
+    padding: 5px;
+    margin: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--black-color);
+    /* display: none; */
+}
+
+.reset-button {
+    width: 180px;
+    height: 35px;
+    padding: 2px;
+    border: 2px solid var(--black-color);
+    background-color: var(--brown-color);
+    color: var(--white-color);
+    font-size: 1.2rem;
+    font-weight: bold;
     cursor: pointer;
+    margin: 10px auto 0px;
+    transition: .3s ease;
+}
+
+.reset-button:hover {
+    color: var(--white-color);
+    border-radius: 10px;
+
+}
+
+/* Scrollbar styling */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

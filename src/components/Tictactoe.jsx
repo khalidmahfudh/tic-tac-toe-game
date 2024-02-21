@@ -97,7 +97,6 @@ function Tictactoe()
     const [currentMove, setCurrentMove] = useState(0);
     const currentSquares = history[currentMove];
 
-    // const [squares, setSquares] = useState(Array(100).fill(null));
     const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
     const [gameState, setGameState] = useState(GameState.inProgress);
 
@@ -131,7 +130,7 @@ function Tictactoe()
 
         return (
             <li key={move}>
-                <button onClick={() => jumpTo(move)}>{description}</button>
+                <button className={(move == 0) ? 'game-start-desc':''} onClick={() => jumpTo(move)}>{description}</button>
             </li>
         )
     })
@@ -141,8 +140,8 @@ function Tictactoe()
     }, [currentSquares]);
 
     return (
-        <div>
-            <h1>Tic Tac Toe</h1>
+        <div className="container">
+            <h1 className="title">Tic Tac Toe Game</h1>
             <div className="main">
                 <Board onPlay={ handlePlay} squares={currentSquares} setPlayerTurn={setPlayerTurn} playerTurn={playerTurn} gameState={gameState} />
                 <History moves={moves} />
