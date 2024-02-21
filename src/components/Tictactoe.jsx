@@ -112,6 +112,12 @@ function Tictactoe() {
         }
     }
 
+    const handleReset = () => {
+        setGameState(GameState.inProgress);
+        setSquares(Array(100).fill(null));
+        setPlayerTurn(PLAYER_X);
+    }
+
     useEffect(() => { 
         checkWinner(squares, setGameState, setPlayerTurn);
     }, [squares]);
@@ -125,7 +131,7 @@ function Tictactoe() {
             </div>
             <div className="footer">
                 <GameOver gameState={gameState}/>
-                <Reset />
+                <Reset gameState={gameState} onReset={handleReset} />
             </div>
         </div>
     )

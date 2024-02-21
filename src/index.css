@@ -52,3 +52,14 @@ opacity: 0.4;
     font-size: 1.5em;
     width: 335px;
 }
+
+.reset-button {
+    text-align: center;
+    border: var(--brown-color) solid 8px;
+    background-color: var(--white-color);
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 1.5em;
+    width: 335px;
+    cursor: pointer;
+}
