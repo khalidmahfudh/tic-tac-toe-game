@@ -124,7 +124,7 @@ function Tictactoe() {
                 <History />
             </div>
             <div className="footer">
-                <GameOver />
+                <GameOver gameState={gameState}/>
                 <Reset />
             </div>
         </div>
