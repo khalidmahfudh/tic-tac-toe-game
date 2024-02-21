@@ -8,7 +8,7 @@ import Reset from "./Reset";
 const PLAYER_X = "X";
 const PLAYER_O = "O";
 
-function checkWinner(squares, setGameState, setPlayerTurn) {
+function checkWinner(currentSquares, setGameState, setPlayerTurn) {
 
     const lines = [
         // horizontal
@@ -66,10 +66,10 @@ function checkWinner(squares, setGameState, setPlayerTurn) {
 
         for (let j = 0; j < line.length; j++) {
 
-        if (squares[line[j]] == 'X') {
+        if (currentSquares[line[j]] == 'X') {
             count_x++;
             count_o = 0;
-        } else if (squares[line[j]] == 'O') {
+        } else if (currentSquares[line[j]] == 'O') {
             count_o++;
             count_x = 0;
         } else {
@@ -86,32 +86,70 @@ function checkWinner(squares, setGameState, setPlayerTurn) {
                 return;
             }
         }
-        const areAllSquaresFilledIn = squares.every((square) => square !== null);
+        const areAllSquaresFilledIn = currentSquares.every((square) => square !== null);
         if (areAllSquaresFilledIn) setGameState(GameState.draw);
     } 
 }
 
 function Tictactoe()
 {
+    const [history, setHistory] = useState([Array(100).fill(null)]);
+    const [currentMove, setCurrentMove] = useState(0);
+    const currentSquares = history[currentMove];
 
-    const [squares, setSquares] = useState(Array(100).fill(null));
+    // const [squares, setSquares] = useState(Array(100).fill(null));
     const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
     const [gameState, setGameState] = useState(GameState.inProgress);
 
+    function jumpTo(nextMove) {
+        if (gameState != GameState.inProgress && nextMove == (history.length - 1) ) return;
+        setCurrentMove(nextMove);
+        setPlayerTurn(nextMove % 2 === 0 ? PLAYER_X : PLAYER_O);
+        setGameState(GameState.inProgress);
+    }
+
+    function handlePlay(nextSquares) {
+        const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+        setHistory(nextHistory);
+        setCurrentMove(nextHistory.length - 1);
+
+        if (playerTurn === PLAYER_X) { 
+            setPlayerTurn(PLAYER_O); 
+        } else { 
+            setPlayerTurn(PLAYER_X); 
+        } 
+
+    }
+
+    const moves = history.map((_, move) => {
+        let description = '';
+        if (move > 0) {
+            description = `Go to move #${move}`;
+        } else {
+            description = "Go to game start";
+        }
+
+        return (
+            <li key={move}>
+                <button onClick={() => jumpTo(move)}>{description}</button>
+            </li>
+        )
+    })
+
     useEffect(() => { 
-        checkWinner(squares, setGameState, setPlayerTurn);
-    }, [squares]);
+        checkWinner(currentSquares, setGameState, setPlayerTurn);
+    }, [currentSquares]);
 
     return (
         <div>
             <h1>Tic Tac Toe</h1>
             <div className="main">
-                <Board setSquares={setSquares} squares={squares} setPlayerTurn={setPlayerTurn} playerTurn={playerTurn} gameState={gameState} />
-                <History />
+                <Board onPlay={ handlePlay} squares={currentSquares} setPlayerTurn={setPlayerTurn} playerTurn={playerTurn} gameState={gameState} />
+                <History moves={moves} />
             </div>
             <div className="footer">
                 <GameOver gameState={gameState} />
-                <Reset setGameState={setGameState} gameState={gameState} setSquares={setSquares} setPlayerTurn={setPlayerTurn} />
+                <Reset setPlayerTurn={setPlayerTurn} setGameState={setGameState} setHistory={setHistory} gameState={gameState} playerTurn={playerTurn} setCurrentMove={setCurrentMove} />
             </div>
         </div>
     )

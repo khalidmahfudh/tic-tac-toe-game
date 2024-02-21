@@ -4,19 +4,22 @@ import { GameState } from "./GameState";
 const PLAYER_X = "X";
 const PLAYER_O = "O";
 
-function Board({ squares, setPlayerTurn, playerTurn, gameState, setSquares}) {
+function Board({ onPlay, squares, playerTurn, gameState}) {
 
     const handleSquareClick = (index) => {
         if (squares[index] || gameState !== GameState.inProgress) return;
-        const newSquares = [...squares];
-        newSquares[index] = playerTurn;
-        setSquares(newSquares);
+        const nextSquares = [...squares];
+        nextSquares[index] = playerTurn;
 
-        if (playerTurn === PLAYER_X) {
-            setPlayerTurn(PLAYER_O);
-        } else {
-            setPlayerTurn(PLAYER_X);
-        }
+        // setSquares(nextSquares); //
+
+        // if (playerTurn === PLAYER_X) { //
+        //     setPlayerTurn(PLAYER_O); //
+        // } else { //
+        //     setPlayerTurn(PLAYER_X); //
+        // } //
+
+        onPlay(nextSquares)
     }
 
     return (
