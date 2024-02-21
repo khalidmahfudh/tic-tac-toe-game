@@ -4,6 +4,16 @@ import Board from "./Board";
 import GameOver from "./GameOver";
 import History from "./History";
 import Reset from "./Reset";
+import gameOverSoundAsset from '../sounds/game_over.wav';
+import clickSoundAsset from '../sounds/click.wav';
+import resetSoundAsset from '../sounds/reset.wav';
+
+const gameOverSound = new Audio(gameOverSoundAsset);
+gameOverSound.volume = 0.2;
+const clickSound = new Audio(clickSoundAsset);
+clickSound.volume = 0.5;
+const resetSound = new Audio(resetSoundAsset);
+resetSound.volume = 0.2;
 
 const PLAYER_X = "X";
 const PLAYER_O = "O";
@@ -139,6 +149,18 @@ function Tictactoe()
         checkWinner(currentSquares, setGameState, setPlayerTurn);
     }, [currentSquares]);
 
+    useEffect(() => {
+        if (currentSquares.some((square) => square !== null)) {
+            clickSound.play();
+        }
+    }, [currentSquares]);
+
+    useEffect(() => {
+        if (gameState !== GameState.inProgress) {
+            gameOverSound.play();
+        }
+    })
+
     return (
         <div className="container">
             <h1 className="title">Tic Tac Toe Game</h1>
@@ -148,7 +170,7 @@ function Tictactoe()
             </div>
             <div className="footer">
                 <GameOver gameState={gameState} />
-                <Reset setPlayerTurn={setPlayerTurn} setGameState={setGameState} setHistory={setHistory} gameState={gameState} playerTurn={playerTurn} setCurrentMove={setCurrentMove} />
+                <Reset resetSound={resetSound} setPlayerTurn={setPlayerTurn} setGameState={setGameState} setHistory={setHistory} gameState={gameState} playerTurn={playerTurn} setCurrentMove={setCurrentMove} />
             </div>
         </div>
     )
