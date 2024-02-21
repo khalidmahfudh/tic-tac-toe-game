@@ -88,35 +88,15 @@ function checkWinner(squares, setGameState, setPlayerTurn) {
         }
         const areAllSquaresFilledIn = squares.every((square) => square !== null);
         if (areAllSquaresFilledIn) setGameState(GameState.draw);
-    }
-    return;
+    } 
 }
 
-
-function Tictactoe() {
+function Tictactoe()
+{
 
     const [squares, setSquares] = useState(Array(100).fill(null));
     const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
     const [gameState, setGameState] = useState(GameState.inProgress);
-
-    const handleSquareClick = (index) => {
-        if (squares[index] || gameState !== GameState.inProgress) return;
-        const newSquares = [...squares];
-        newSquares[index] = playerTurn;
-        setSquares(newSquares);
-
-        if (playerTurn === PLAYER_X) {
-            setPlayerTurn(PLAYER_O);
-        } else {
-            setPlayerTurn(PLAYER_X);
-        }
-    }
-
-    const handleReset = () => {
-        setGameState(GameState.inProgress);
-        setSquares(Array(100).fill(null));
-        setPlayerTurn(PLAYER_X);
-    }
 
     useEffect(() => { 
         checkWinner(squares, setGameState, setPlayerTurn);
@@ -126,12 +106,12 @@ function Tictactoe() {
         <div>
             <h1>Tic Tac Toe</h1>
             <div className="main">
-                <Board onSquareClick={handleSquareClick} squares={ squares } playerTurn={playerTurn}/>
+                <Board setSquares={setSquares} squares={squares} setPlayerTurn={setPlayerTurn} playerTurn={playerTurn} gameState={gameState} />
                 <History />
             </div>
             <div className="footer">
-                <GameOver gameState={gameState}/>
-                <Reset gameState={gameState} onReset={handleReset} />
+                <GameOver gameState={gameState} />
+                <Reset setGameState={setGameState} gameState={gameState} setSquares={setSquares} setPlayerTurn={setPlayerTurn} />
             </div>
         </div>
     )
