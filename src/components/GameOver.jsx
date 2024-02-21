@@ -1,5 +1,5 @@
 function GameOver() {
-    return <div>GameOver</div>;
+    return <div></div>;
 }
 
 export default GameOver;

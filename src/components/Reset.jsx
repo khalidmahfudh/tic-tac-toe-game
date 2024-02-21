@@ -1,5 +1,5 @@
 function Reset() {
-    return <div>Reset</div>;
+    return <div></div>;
 }
 
 export default Reset;
