@@ -4,39 +4,130 @@
     --black-color: #271810;
     --white-color: #e7cfb4;
 }
+
 * {
     margin: 0;
     padding: 0;
 }
 
+/* START STYLING BODY & CONTAINER */
 body {
-    padding: 20px;
     font-family: 'Poppins', sans-serif;
-    max-height: 100vh;
-    width: 100%;
     background-color: var(--white-color);
+    padding: 20px;
+    height: 100vh;
+    width: 100%;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    vertical-align: middle;
 }
+
+
+/* FINISH STYLING BODY & CONTAINER */
+
+
+/* START STYLING TITLE */
 
 h1.title {
     color: var(--black-color);
-    margin: 10px auto;
     border: 5px dotted var(--black-color);
-    padding: 10px 20px;
+    padding: 0 20px;
 }
 
+@media screen and (min-width: 992px) {
+    h1.title {
+        font-size: 3em;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    h1.title {
+        font-size: 2em;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    h1.title {
+        font-size: 1.7em;
+    }
+}
+
+
+/* END STYLING TITLE */
+
+/* START STYLING  MAIN (BOARD & HISTORY WRAP) */
 
 .container .main {
     padding: 20px;
     display: flex;
 }
+
+@media screen and (max-width: 575px) {
+    .container .main {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* FINISH STYLING  MAIN (BOARD & HISTORY WRAP) */
+
+/* START STYLNG BOARD */
+
+.container .board {
+    display: flex;
+    flex-wrap: wrap;
+    height: 350px;
+    min-height: 350px;
+    width: 350px;
+    border: solid 10px var(--brown-color);
+}
+
+.container .board .square {
+    width: 35px;
+    height: 35px;
+    border: 1px solid var(--black-color);
+    background-color: var(--white-color);
+    font-size: 1.2rem;
+    color: var(--black-color);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.x-hover:hover::after {
+    content: "X";
+    opacity: 0.4;
+}
+
+.o-hover:hover::after {
+    content: "O";
+    opacity: 0.4;
+}
+
+@media screen and (max-width: 575px) {
+    .container .board {
+        /* height : 250px; */
+        /* min-height: 250px; */
+        /* width: 250px; */
+        border: solid 3px var(--brown-color);
+        margin-bottom: 15px;
+    }
+
+    .container .board .square {
+        /* height: 25px; */
+        /* width: 25px; */
+        font-size: 1rem;
+        padding-top: 1px;
+    }
+}
+
+/* END STYLNG BOARD */
+
+/* START STYLING HISTORY */
 
 .container .main .history {
     width: 150px;
@@ -44,7 +135,6 @@ h1.title {
     margin-left: 15px;
     border: solid 10px var(--brown-color);
     background-color: var(--white-color);
-    overflow-y: hidden;
 }
 
 .container .main .history p {
@@ -57,11 +147,10 @@ h1.title {
 
 .container .main .history .history-list{
     padding: 10px 0;
-    overflow-y: auto;
     display: flex;
     justify-content: center;
-    max-height: 82%;
-
+    max-height: 80%;
+    overflow-y: auto;
 }
 
 .container .main .history .history-list ol{
@@ -97,37 +186,49 @@ h1.title {
     font-weight: bold;
 }
 
+@media screen and (max-width: 575px) {
+    .container .main .history {
+        margin-left: 0px;
+        width: 350px;
+        max-height: 200px;
+        border-width: 3px;
+    }
 
-.square {
-    width: 35px;
-    height: 35px;
-    border: 1px solid var(--black-color);
-    background-color: var(--white-color);
-    font-size: 1.2rem;
-    color: var(--black-color);
-    cursor: pointer;
-    font-weight: bold;
+    .container .main .history p {
+        padding: 0;
+        border-bottom-width: 3px;
+    }
+    
+    .container .main .history .history-list{
+        padding: 10px 5px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: start;
+    }
+    
+    .container .main .history .history-list ol{
+        flex-direction: row;
+    }
+    
+    .container .main .history .history-list ol button{
+        width: 80px;
+        font-size: 0.7rem;
+        margin: 3px;
+    }
+    
+    .container .main .history .history-list ol button:hover {
+        border-radius: 3px;
+    }
+    
+    .container .main .history .history-list ol button.game-start-desc {
+        height: 35px;
+        font-size: 0.7rem;
+    }
 }
 
-.board {
-    display: flex;
-    flex-wrap: wrap;
-    height: 350px;
-    min-height: 350px;
-    width: 350px;
-    min-width: 350px;
-    border: solid 10px var(--brown-color);
-}
+/* FINISH STYLING HISTORY */
 
-.x-hover:hover::after {
-    content: "X";
-    opacity: 0.4;
-}
-
-.o-hover:hover::after {
-content: "O";
-opacity: 0.4;
-}
+/* START STYLING FOOTER */
 
 .footer {
     display: flex;
@@ -144,7 +245,6 @@ opacity: 0.4;
     font-size: 1.2em;
     font-weight: bold;
     color: var(--black-color);
-    /* display: none; */
 }
 
 .reset-button {
@@ -167,7 +267,26 @@ opacity: 0.4;
 
 }
 
-/* Scrollbar styling */
+@media screen and (max-width: 575px) {
+    .footer {
+        margin: -10px 0;
+    }
+
+    .game-over {
+        padding: 1px;
+        margin: 3px;
+    }
+    
+    .reset-button:hover {
+        border-radius: 5px;
+    }
+
+}
+
+/* FINISH STYLING FOOTER */
+
+
+/* START STYLING SCROLLBAR */
 
 /* width */
 ::-webkit-scrollbar {
@@ -188,3 +307,5 @@ opacity: 0.4;
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+/* FINISH STYLING SCROLLBAR */

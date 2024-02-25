@@ -11,14 +11,6 @@ function Board({ onPlay, squares, playerTurn, gameState}) {
         const nextSquares = [...squares];
         nextSquares[index] = playerTurn;
 
-        // setSquares(nextSquares); //
-
-        // if (playerTurn === PLAYER_X) { //
-        //     setPlayerTurn(PLAYER_O); //
-        // } else { //
-        //     setPlayerTurn(PLAYER_X); //
-        // } //
-
         onPlay(nextSquares)
     }
 
